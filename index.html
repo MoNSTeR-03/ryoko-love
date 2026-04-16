@@ -14,11 +14,9 @@ body {
   overflow: hidden;
 }
 
-/* Screens */
 .screen { display: none; padding-top: 80px; }
 .active { display: block; }
 
-/* Glitch system style */
 .glitch {
   font-size: 28px;
   animation: glitch 0.3s infinite;
@@ -30,7 +28,6 @@ body {
   100% {text-shadow: 2px -2px violet;}
 }
 
-/* Card */
 .card {
   background: rgba(255,255,255,0.1);
   padding: 20px;
@@ -41,14 +38,13 @@ body {
   box-shadow: 0 0 30px purple;
 }
 
-/* Image */
 img {
   width: 220px;
   border-radius: 20px;
   box-shadow: 0 0 25px #ff66ff;
+  margin-top: 10px;
 }
 
-/* Buttons */
 button {
   padding: 10px 20px;
   margin: 10px;
@@ -59,13 +55,13 @@ button {
 }
 
 .yes { background: #ff66cc; color: white; }
+
 .no {
   background: gray;
   color: white;
   position: absolute;
 }
 
-/* Chat */
 .chat {
   width: 80%;
   margin: auto;
@@ -79,7 +75,6 @@ button {
   border-radius: 10px;
 }
 
-/* Hearts */
 .heart {
   position: absolute;
   animation: float 4s linear infinite;
@@ -94,45 +89,47 @@ button {
 
 <body>
 
-<!-- 💜 SYSTEM HACK -->
+<!-- HACK -->
 <div id="hack" class="screen active">
-  <h1 class="glitch">Accediendo al corazón de Ryōko... 💜<br>Usuario: Ahmad 🖤</h1>
+  <h1 class="glitch">Accediendo a tu corazón... 💜</h1>
 </div>
 
-<!-- 💜 ANALYZING -->
+<!-- LOADING -->
 <div id="loading" class="screen">
-  <h1>Analizando sentimientos de Ahmad... 🧠💜</h1>
+  <h1>Analizando sentimientos... 🧠💜</h1>
 </div>
 
-<!-- 💜 COUNTDOWN -->
+<!-- COUNTDOWN -->
 <div id="countdown" class="screen">
   <h1 id="count">3</h1>
 </div>
 
-<!-- 💜 GAME -->
+<!-- GAME -->
 <div id="game" class="screen">
   <div class="card">
     <h2 id="question"></h2>
-    <img src="yourimage.jpg"><br>
+    <img src="ryoko.jpeg"><br>
     <button class="yes" onclick="nextQ()">Sí 😍</button>
     <button class="no" id="noBtn" onmouseover="moveNo()">No 😏</button>
   </div>
 </div>
 
-<!-- 💜 CHAT SIMULATION -->
+<!-- CHAT -->
 <div id="chat" class="screen">
-  <h2>Simulación de chat 💬 (Ahmad 💜)</h2>
+  <h2>💬</h2>
   <div class="chat" id="chatBox"></div>
 </div>
 
-<!-- 💜 FINAL -->
+<!-- FINAL -->
 <div id="final" class="screen">
-  <h1>Ryōko... 💜<br>
-  Esto no es un juego...<br>
-  Soy Ahmad... y te amo de verdad 🥹💖</h1>
+  <h1>
+  Ryōko... 💜<br><br>
+  Esto no es un juego...<br><br>
+  Soy yo… Ahmad 🖤<br><br>
+  Y te amo de verdad 🥹💖
+  </h1>
 </div>
 
-<!-- 💜 MUSIC -->
 <audio autoplay loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
 </audio>
@@ -141,8 +138,8 @@ button {
 let step = 0;
 
 let questions = [
-"Ryōko 💜 ¿Eres feliz conmigo ?",
-"¿Piensas en Ahmad cada día? 😏",
+"Ryōko 💜 ¿Eres feliz conmigo?",
+"¿Piensas en mí cada día? 😏",
 "¿Soy tu lugar seguro? 🥺",
 "¿Te quedarías conmigo para siempre? 💖"
 ];
@@ -152,7 +149,6 @@ function show(id){
   document.getElementById(id).classList.add("active");
 }
 
-/* Flow */
 setTimeout(()=>show("loading"),2000);
 setTimeout(()=>{show("countdown"); startCountdown();},4000);
 
@@ -178,18 +174,16 @@ function nextQ(){
   }
 }
 
-/* NO button escape */
 function moveNo(){
   let btn=document.getElementById("noBtn");
   btn.style.left=Math.random()*(window.innerWidth-100)+"px";
   btn.style.top=Math.random()*(window.innerHeight-100)+"px";
 }
 
-/* Chat simulation */
 let msgs = [
 "Ryōko 💜...",
 "Quiero decirte algo...",
-"Ahmad no puede dejar de pensar en ti 🥹",
+"No puedo dejar de pensar en ti 🥹",
 "Eres lo mejor que me pasó 💖",
 "Prometo hacerte feliz siempre ❤️"
 ];
@@ -213,7 +207,6 @@ function startChat(){
   },1200);
 }
 
-/* Hearts */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
@@ -224,9 +217,8 @@ setInterval(()=>{
   setTimeout(()=>h.remove(),4000);
 },300);
 
-/* Voice */
 setTimeout(()=>{
-  let msg = new SpeechSynthesisUtterance("Ryoko... soy Ahmad... te amo muchísimo");
+  let msg = new SpeechSynthesisUtterance("Ryoko... soy yo Ahmad... te amo muchísimo");
   msg.lang = "es-ES";
   speechSynthesis.speak(msg);
 },8000);

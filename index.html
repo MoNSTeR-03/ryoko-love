@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ryōko 💜</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Comic Sans MS', cursive;
+  background: black;
+  color: #ff99ff;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Screens */
+.screen { display: none; padding-top: 80px; }
+.active { display: block; }
+
+/* Glitch system style */
+.glitch {
+  font-size: 28px;
+  animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+  0% {text-shadow: 2px 2px purple;}
+  50% {text-shadow: -2px -2px pink;}
+  100% {text-shadow: 2px -2px violet;}
+}
+
+/* Card */
+.card {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  margin: auto;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px purple;
+}
+
+/* Image */
+img {
+  width: 220px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px #ff66ff;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.yes { background: #ff66cc; color: white; }
+.no {
+  background: gray;
+  color: white;
+  position: absolute;
+}
+
+/* Chat */
+.chat {
+  width: 80%;
+  margin: auto;
+  text-align: left;
+}
+
+.msg {
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  animation: float 4s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-800px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 💜 SYSTEM HACK -->
+<div id="hack" class="screen active">
+  <h1 class="glitch">Accediendo al corazón de Ryōko... 💜<br>Usuario: Ahmad 🖤</h1>
+</div>
+
+<!-- 💜 ANALYZING -->
+<div id="loading" class="screen">
+  <h1>Analizando sentimientos de Ahmad... 🧠💜</h1>
+</div>
+
+<!-- 💜 COUNTDOWN -->
+<div id="countdown" class="screen">
+  <h1 id="count">3</h1>
+</div>
+
+<!-- 💜 GAME -->
+<div id="game" class="screen">
+  <div class="card">
+    <h2 id="question"></h2>
+    <img src="yourimage.jpg"><br>
+    <button class="yes" onclick="nextQ()">Sí 😍</button>
+    <button class="no" id="noBtn" onmouseover="moveNo()">No 😏</button>
+  </div>
+</div>
+
+<!-- 💜 CHAT SIMULATION -->
+<div id="chat" class="screen">
+  <h2>Simulación de chat 💬 (Ahmad 💜)</h2>
+  <div class="chat" id="chatBox"></div>
+</div>
+
+<!-- 💜 FINAL -->
+<div id="final" class="screen">
+  <h1>Ryōko... 💜<br>
+  Esto no es un juego...<br>
+  Soy Ahmad... y te amo de verdad 🥹💖</h1>
+</div>
+
+<!-- 💜 MUSIC -->
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+</audio>
+
+<script>
+let step = 0;
+
+let questions = [
+"Ryōko 💜 ¿Eres feliz conmigo y Ahmad?",
+"¿Piensas en Ahmad cada día? 😏",
+"¿Soy tu lugar seguro? 🥺",
+"¿Te quedarías conmigo para siempre? 💖"
+];
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+/* Flow */
+setTimeout(()=>show("loading"),2000);
+setTimeout(()=>{show("countdown"); startCountdown();},4000);
+
+function startCountdown(){
+  let c=3;
+  let el=document.getElementById("count");
+  let i=setInterval(()=>{
+    c--; el.innerText=c;
+    if(c===0){clearInterval(i); show("game"); loadQ();}
+  },1000);
+}
+
+function loadQ(){
+  document.getElementById("question").innerText=questions[step];
+}
+
+function nextQ(){
+  step++;
+  if(step<questions.length){
+    loadQ();
+  } else {
+    startChat();
+  }
+}
+
+/* NO button escape */
+function moveNo(){
+  let btn=document.getElementById("noBtn");
+  btn.style.left=Math.random()*(window.innerWidth-100)+"px";
+  btn.style.top=Math.random()*(window.innerHeight-100)+"px";
+}
+
+/* Chat simulation */
+let msgs = [
+"Ryōko 💜...",
+"Quiero decirte algo...",
+"Ahmad no puede dejar de pensar en ti 🥹",
+"Eres lo mejor que me pasó 💖",
+"Prometo hacerte feliz siempre ❤️"
+];
+
+function startChat(){
+  show("chat");
+  let box=document.getElementById("chatBox");
+  let i=0;
+
+  let interval=setInterval(()=>{
+    let m=document.createElement("div");
+    m.className="msg";
+    m.innerText=msgs[i];
+    box.appendChild(m);
+    i++;
+
+    if(i>=msgs.length){
+      clearInterval(interval);
+      setTimeout(()=>show("final"),2000);
+    }
+  },1200);
+}
+
+/* Hearts */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💜";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(Math.random()*20+10)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),4000);
+},300);
+
+/* Voice */
+setTimeout(()=>{
+  let msg = new SpeechSynthesisUtterance("Ryoko... soy Ahmad... te amo muchísimo");
+  msg.lang = "es-ES";
+  speechSynthesis.speak(msg);
+},8000);
+</script>
+
+</body>
+</html>
